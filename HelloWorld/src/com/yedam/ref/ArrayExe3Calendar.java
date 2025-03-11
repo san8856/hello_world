@@ -65,6 +65,5 @@ public class ArrayExe3Calendar {
 			System.out.print("test");
 			}
 		}
-
 	}// end of main()
 }
