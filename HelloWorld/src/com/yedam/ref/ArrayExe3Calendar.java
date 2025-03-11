@@ -43,7 +43,7 @@ public class ArrayExe3Calendar {
 			System.out.print(" " + day);
 		}
 		System.out.println();//줄바꿈
-		int month = 4;
+		int month = 3;
 		int space = getFirstDay(month); //1일의 위치값
 		int lastDate = getLastDay(month); //마지막날
 		// 공백갯수많큼 빈칸
@@ -60,6 +60,9 @@ public class ArrayExe3Calendar {
 			//줄 바꿈.
 			if ((space+d) % 7 == 0) {
 				System.out.println();
+			}
+			if (month == 3 && d == 21) {
+			System.out.print("test");
 			}
 		}
 
