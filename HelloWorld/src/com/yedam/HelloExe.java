@@ -13,6 +13,7 @@ public class HelloExe {
 	   int score = 100;
 	   //연산을 할땐 타입이 같아야 함
 	   System.out.println("점수는 " + score + "점 입니다");
+	   System.out.println("수정된 부분");
 	   
 	   
    }
