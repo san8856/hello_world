@@ -165,13 +165,30 @@ public class BookMain {
 	
 	//도서명으로 조회하는 기능
 	public static Book searchBook(String title) {
-	for(int i=0; i<bookStore.length; i++) {
-		if (bookStore[i] != null && bookStore[i].getTitle().equals(title)) {
-			return bookStore[i];
+		for(int i=0; i<bookStore.length; i++) {
+			if (bookStore[i] != null && bookStore[i].getTitle().equals(title)) {
+				return bookStore[i];
+				}
+			}
+		return null;
+		}	//조회결과가 있으면 book 없으면 null 반환
+	
+	//출판사 명으로 조회
+	public static void searchPublisher() {
+		System.out.println("조회할 출판사를 입력 >> ");
+		String publisher = scn.nextLine();
+		boolean isExist = false;
+		System.out.println("출판사: " + publisher);
+		for (Book bok : bookStore) {
+			if (bok != null && bok.getCompany().equals(publisher)) {
+				System.out.println(bok.showListWithNo());
+				isExist =true;
 			}
 		}
-	return null;
-	}	//조회결과가 있으면 book 없으면 null 반환
+		if (!isExist) {
+			System.out.println("조회된 책이 없습니다.");
+		}
+	}//end of searchPublisher. 
 		
 	//등록, 수정, 삭제, 목록
 	public static void main(String[] args) {
@@ -190,7 +207,7 @@ public class BookMain {
 		init();
 		boolean run = true;
 		while(run) {
-			System.out.println("1. 도서등록 2. 수정 3. 삭제 4. 목록 5. 상세조회 9. 종료");
+			System.out.println("1. 도서등록 2. 수정 3. 삭제 4. 목록 5. 상세조회 6.목록조회(출판사) 9. 종료");
 			System.out.println("선택 >> ");
 			int menu = Integer.parseInt(scn.nextLine());
 			switch(menu) {
@@ -206,7 +223,9 @@ public class BookMain {
 			case 4:    //목록
 				list();	break;
 			case 5:    //상세조회
-				bookInfo(); break;			
+				bookInfo(); break;	
+			case 6:
+				searchPublisher(); break;
 			case 9:    //종료
 				run =false;
 				break;
