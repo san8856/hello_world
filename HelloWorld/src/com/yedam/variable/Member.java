@@ -37,6 +37,13 @@ public class Member {
 			return; // 메소드의 종료. -> 다음 메소드로 넘어가지 않음.
 		}
 		this.score = score;
+	}
+	//name 필드의 값을 지정.
+	public void setName(String name) {
+		this.name = name;
+	}
+			
+		
 		
 	}
-}
+
