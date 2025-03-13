@@ -22,10 +22,11 @@ public class Book {
 	
 	public Book(String title, String author, String company, int price, int orderNo) {
 //		super();//부모클래스의 생성자를 불러옴 (상속)
-		this.title = title;
-		this.author = author;
-		this.company = company;
-		this.price = price;
+//		this.title = title;
+//		this.author = author;
+//		this.company = company;
+//		this.price = price;
+		this(title, author, company, price); //this: 생성된 인스턴스 //첫번째 줄에만 사용
 		this.orderNo = orderNo;
 	}
 	
@@ -35,6 +36,9 @@ public class Book {
 	}
 	public String showListWithNo() {
 		return orderNo + " " + title + " " + author + " " + price;
+	}
+	public String showListPublisher() {
+		return orderNo + " " + title + " " + author + " " + company + " "+ price;
 	}
 	public String showBookInfo() {
 		String msg = "제목은 " + title + "/ 저자는 " + author + "\n출판사는 " + company + "/ 가격은 " + price;

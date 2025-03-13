@@ -129,20 +129,35 @@ public class BookMain {
 				}
 			}
 		}//end of for.
-		
 		int seqNo = 1;
 		System.out.println("순번  제목    저자   가격");
 		System.out.println("====================");
-//		for(int i=0; i<bookStore.length; i++) {
-//			if(bookStore[i] !=null) {
-//			System.out.println(bookStore[i].getTitle() + " " + bookStore[i].getAuthor() + " " + bookStore[i].getPrice());
-//			}
+		Book[] list = searchList(null);
+
 		for (Book bok : bookStore) {
 			if (bok != null)
 				System.out.println(seqNo++ + " " + bok.showList());
 		}
 		
 	}//end of list()
+	
+	public static void listCompany() {
+		System.out.println("조회할 출판사 입력 >> ");
+		String company = scn.nextLine();
+		
+		
+		int seqNo = 1;
+		System.out.println("순번  제목    저자   가격");
+		System.out.println("====================");
+		Book[] list = searchList(company);
+		for (Book bok : bookStore) {
+			if (bok != null) {
+				if (bok.getCompany().equals(company)) {
+					System.out.println(seqNo++ + " " + bok.showList());					
+				}
+			}
+		}
+	} //end of listCompany().
 	
 	public static void bookInfo() {
 		//반드시 값을 입력하도록
@@ -163,6 +178,22 @@ public class BookMain {
 		System.out.println(result.showBookInfo());		
 	}//end of bookinfo()
 	
+	///list와 listCompany에서 활용할 공통 메소드.
+	
+	public static Book[] searchList(String keyword) {
+		Book[] list = new Book[100];
+		int idx =0;
+		for (int i=0; i< bookStore.length; i++) {
+			if(bookStore[i] != null) {
+				if (keyword == null || bookStore[i].getCompany().equals(keyword)) {
+					list[idx++] = bookStore[i];		
+				}
+			}
+		}
+		return list;
+	}//end of searchList.
+	
+	
 	//도서명으로 조회하는 기능
 	public static Book searchBook(String title) {
 		for(int i=0; i<bookStore.length; i++) {
@@ -171,7 +202,7 @@ public class BookMain {
 				}
 			}
 		return null;
-		}	//조회결과가 있으면 book 없으면 null 반환 dd
+		}	//조회결과가 있으면 book 없으면 null 반환 
 	
 	//출판사 명으로 조회
 	public static void searchPublisher() {
@@ -181,7 +212,7 @@ public class BookMain {
 		System.out.println("출판사: " + publisher);
 		for (Book bok : bookStore) {
 			if (bok != null && bok.getCompany().equals(publisher)) {
-				System.out.println(bok.showListWithNo());
+				System.out.println(bok.showListPublisher());
 				isExist =true;
 			}
 		}
@@ -225,7 +256,7 @@ public class BookMain {
 			case 5:    //상세조회
 				bookInfo(); break;	
 			case 6:
-				searchPublisher(); break;
+				listCompany(); break;
 			case 9:    //종료
 				run =false;
 				break;
@@ -234,12 +265,15 @@ public class BookMain {
 				
 			}
 		}
-		System.out.println("end of prog.");
+		System.out.println("프로그램을 종료합니다.");
 	}//end of main().
 	public static void init() {
 		bookStore[0] = new Book("이것이자바다", "신용권", "한빛출", 20000, 1);
 		bookStore[1] = new Book("스크립트기초", "박기초", "우리출", 26000, 2);
-		bookStore[2] = new Book("HTML,SCC", "김하늘", "가람출", 25000, 3);		
+		bookStore[2] = new Book("HTML,SCC", "김하늘", "가람출", 25000, 3);
+		bookStore[3] = new Book("이것이자바다2", "신용권", "한빛출", 20000, 1);
+		bookStore[4] = new Book("스크립트기초2", "박기초", "우리출", 26000, 2);
+		bookStore[5] = new Book("HTML,SCC2", "김하늘", "가람출", 25000, 3);	
 	}
 }
 
