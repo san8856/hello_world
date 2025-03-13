@@ -59,7 +59,7 @@ public class MethodExe3 {
 //			}
 //		}
 //	}
-	//중복제거 후
+	//중복제거 후~
 	void printCard() {
 		//배열선언
 		int[] intAry = new int[16];
