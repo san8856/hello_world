@@ -44,7 +44,7 @@ public class MethodExe3 {
 	
 	
 	
-	
+// 중복제거 전	
 //	void printCard() {
 //		//배열선언
 //		int[] intAry = new int[16];
@@ -59,6 +59,7 @@ public class MethodExe3 {
 //			}
 //		}
 //	}
+	//중복제거 후
 	void printCard() {
 		//배열선언
 		int[] intAry = new int[16];
