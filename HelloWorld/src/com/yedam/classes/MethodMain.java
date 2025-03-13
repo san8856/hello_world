@@ -5,20 +5,13 @@ public class MethodMain {
 		MethodExe3 m3 = new MethodExe3();
 //		System.out.println(m3.gugudan(3, 7));
 		
-		System.out.println(m3.printStar(5, "★"));
-		
+//		System.out.println(m3.printStar(5, "★"));
+//		
+//		System.out.println(m3.printStar(4,"*"));
 	
-	
-//		m3.printCard();
-	//중복 안되게 수정
-		
-	
-	
-	
-	
-	
-	
-	
+		m3.printCard();
+//	중복 안되게 수정
+
 	
 	
 	}
