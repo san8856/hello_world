@@ -171,7 +171,7 @@ public class BookMain {
 				}
 			}
 		return null;
-		}	//조회결과가 있으면 book 없으면 null 반환
+		}	//조회결과가 있으면 book 없으면 null 반환 dd
 	
 	//출판사 명으로 조회
 	public static void searchPublisher() {
