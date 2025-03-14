@@ -1,8 +1,10 @@
 package com.yedam.classes;
 
 public class MethodExe2 {
+	
+	
 	//필드
-	Product[] store;	
+	private Product[] store;	
 	
 	//생성자
 	MethodExe2() {
@@ -28,42 +30,41 @@ public class MethodExe2 {
 	}//end of void add(Product prd)
 	
 	//상품이름, ALL
-//	Product[] productList(String name) {
-//		Product[] list = new Product[10];
-//		int idx = 0;
-//		for (int i = 0; i < store.length; i++) {
-//			if(store[i] != null) {
-//				if (name.equals("ALL")
-//					|| store[i].getProductName().equals(name)) {
-//					list[idx++] = store[i];
-//				}
-//			}
-//		}
-//		return list;
-//	}//end of productList
-	//코드로 조회
-	
 	Product[] productList(Product prd) {
 		Product[] list = new Product[10];
 		int idx = 0;
 		for (int i = 0; i < store.length; i++) {
 			if(store[i] != null) {
-				if (prd.getProductName().equals("ALL") || store[i].getProductName().equals(prd.getProductName())) {
-					//상품의 가격이 조건으로 추가됨.
-					if(store[i].getPrice() >= prd.getPrice()) {
-						list[idx++] = store[i];
-					}
+				if (prd.getProductName().equals("ALL")//
+					|| store[i].getProductName().equals(prd.getProductName())) {
+					list[idx++] = store[i];
 				}
 			}
 		}
-			return list;
+		return list;
 	}//end of productList
+	//코드로 조회
+	
+//	Product[] productList(Product prd) {
+//		Product[] list = new Product[10];
+//		int idx = 0;
+//		for (int i = 0; i < store.length; i++) {
+//			if(store[i] != null) {
+//				if (prd.getProductName().equals("ALL") || store[i].getProductName().equals(prd.getProductName())) {
+//					//상품의 가격이 조건으로 추가됨.
+//					if(store[i].getPrice() >= prd.getPrice()) {
+//						list[idx++] = store[i];
+//					}
+//				}
+//			}
+//		}
+//			return list;
+//	}//end of productList
 
 	//삭제 - 상품코드로 삭제
 	//boolean remove(String code)
 	boolean remove(String code) {
 		Product[] remove = new Product[10];
-				int idx = 0;
 		for (int i = 0; i < store.length; i++) {
 			if(store[i] != null
 				&& store[i].getProductCode().equals(code)) {

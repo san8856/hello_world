@@ -1,20 +1,82 @@
 package com.yedam.classes;
 
+import java.util.Scanner;
+
 public class MethodMain {
-	public static void main(String[] args) {
-		MethodExe3 m3 = new MethodExe3();
-//		System.out.println(m3.gugudan(3, 7));
-		
-//		System.out.println(m3.printStar(5, "★"));
-//		
-//		System.out.println(m3.printStar(4,"*"));
 	
-		m3.printCard();
-//	중복 안되게 수정
+	public static void main(String[] args) {
+		Scanner scn;
+		officeApp();
+
+	} //end of main.
+	
+
+	
+	static void officeApp() {
+		//목록,추가,수정,삭제...
+		MethodExe2 m2 = new MethodExe2(); // 기능정의.
+		Scanner scn = new Scanner(System.in);		
+		Product prd = new Product();
+		//사용자 입력 받아서 1.목록,2.추가,3.수정,4.삭제,9.종료 구현.
+		//입력 메세지 정의 구현.
+		boolean run = true;
+		while(run) {
+			System.out.println("1.상품목록 2.상품추가 3.상품수정 4.상품삭제 9.종료");
+			System.out.println("선택 > ");
+			int menu = Integer.parseInt(scn.nextLine());
+			switch(menu) {
+			case 1: 
+				prd.setProductName("ALL");
+				Product[] list = m2.productList(prd);
+				for(int i=0; i<list.length; i++) {
+					if(list[i] != null){
+						System.out.println(list[i].showList());						
+					}
+				}
+				break;
+			case 2:
+				System.out.println("코드 입력 > ");
+				String code = scn.nextLine();
+				System.out.println("제품 입력 > ");
+				String name = scn.nextLine();
+				System.out.println("가격 입력 > ");
+				String price = scn.nextLine();
+				Product store = new Product(code, name, Integer.parseInt(price));
+				if(m2.add(store)) {
+					System.out.println("등록되었습니다.");					
+				}
+				break;
+			case 3:				
+				System.out.println("수정할 제품의 코드 입력 > ");
+				String reCode = scn.nextLine();
+				System.out.println("제품 입력 > ");
+				String reName = scn.nextLine();
+				System.out.println("가격 입력 > ");
+				String rePrice = scn.nextLine();
+				Product prod = new Product(reCode, reName, Integer.parseInt(rePrice));
+				if(m2.modify(prod)) {
+					System.out.println("수정되었습니다.");					
+				}
+				break;
+			case 4:
+				System.out.println("삭제할 제품의 코드 입력 > ");
+				String decode = scn.nextLine();
+				if(m2.remove(decode)) {
+					System.out.println("삭제되었습니다.");
+				}
+				break;
+			case 5:
+				run =false;
+				System.out.println("프로그램을 종료합니다.");
+				break;
+			default:
+				System.out.println("메뉴를 다시 선택해 주세요");			
+			}			
+		}
+	}
 
 	
 	
-	}
 	
 	
 	
@@ -23,6 +85,36 @@ public class MethodMain {
 	
 	
 	
+	
+		void method4() {		//
+			//인스턴스(m3).메소드 -> 인스턴스 멤버
+			
+			//클래스이름(MethodExe3).메소드 -> 정적 멤버	
+				
+			//인스턴스 생성, 사용 / static 사용, 인스턴스 비생성/미비용	
+			
+				MethodExe4 m4 = new MethodExe4();
+//				m4.main(); 
+				//인스턴스 - 인스턴스
+//				MethodExe4.main();
+				//정적 - 정적
+				m4.main();
+				//정적 - 인스턴스
+				//인스턴스 - 정적 (불가능)
+		}
+		
+	
+		void method3() {
+//			MethodExe3 m3 = new MethodExe3();
+//			System.out.println(m3.gugudan(3, 7));
+			
+//			System.out.println(m3.printStar(5, "★"));
+//			
+//			System.out.println(m3.printStar(4,"*"));
+		
+			MethodExe3.printCard();
+//		중복 안되게 수정
+		}	
 	
 	
 	
@@ -33,10 +125,12 @@ public class MethodMain {
 //			if (m2.add(new Product("M001", "만연필", 10000))) {
 //				System.out.println("등록성공");
 //			}; //add가 false/true를 반환하기 때문에 if 안에 들어갈수있음
+			
 			//삭제
 //			if (m2.remove("A001")) {
 //				System.out.println("삭제성공");
 //			};
+			
 			//수정
 			//상품코드, 상품명, 가격  modify(Product prod)
 //			Product prod = new Product("A001" , null , 16000);
@@ -56,15 +150,6 @@ public class MethodMain {
 			}	
 		//end of main.
 		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

@@ -1,19 +1,32 @@
 package com.yedam.bookApp;
 
 import java.util.Scanner;
-
+//인스턴스 멤버, 정적멤버
 public class BookMain {
+	//2. 정적 필드 선언, 값 할당  instance -> 싱글톤(singleton)
+	private static BookMain instance = new BookMain();
+	//1. 생성자 private 선언.
+	private BookMain() {
+		
+	}
+	//3. getInstance() 제공.
+	//BookMain.instance 로 호출해야 하기에 static
+	public static BookMain getInstance() {
+		return instance;
+	}
 	
-	static Book[] bookStore = new Book[100];
-	static Scanner scn = new Scanner(System.in);
 	
-//	static String name; //static -> 인스턴트가 없어도 바로 실행 가능
-//	public static void test() {
+	//저장공간
+	 Book[] bookStore = new Book[100];
+	 Scanner scn = new Scanner(System.in);
+	
+//	 String name; //static -> 인스턴트가 없어도 바로 실행 가능
+//	public  void test() {
 //		System.out.println("test");
 //	}
 	
 	//순번생성 메소드
-	public static int getSequnceNo() {
+	public  int getSequnceNo() {
 		int max = 0;
 		for(int i=0;i<bookStore.length; i++) {
 			if(bookStore[i] !=null //
@@ -27,9 +40,8 @@ public class BookMain {
 	//등록을 구현 하는 메소드
 	//1. 이미 존재하는 제목은 입력불가
 	
-	public static void add() {
-		
-		System.out.print("제목 입력 >> ");
+	public  void add() {
+		System.out.print("제목입력 >> ");
 		String title =scn.nextLine();
 		if(searchBook(title) != null) {
 			System.out.println("이미 등록된 책입니다.");
@@ -57,7 +69,7 @@ public class BookMain {
 		}
 	}// end of add()
 	
-	public static void edit() {
+	public  void edit() {
 		System.out.print("수정 할 책 제목을 입력 >> ");
 		String title = scn.nextLine();
 		boolean isExist = false;
@@ -91,7 +103,7 @@ public class BookMain {
 		}
 	} //end of edit()
 	
-	public static void delete(){
+	public  void delete(){
 		boolean isExist = false;
 		String title = "";
 		while (true) {
@@ -112,7 +124,7 @@ public class BookMain {
 		}
 	}//end of delete()
 	
-	public static void list() {
+	public  void list() {
 		//순번을 기준으로 정렬
 		//오름차순 순번1 > 순번2, 순번2(null)인 경우 제외, 순번1(null)인 경우 변경
 		Book temp = null;
@@ -141,7 +153,7 @@ public class BookMain {
 		
 	}//end of list()
 	
-	public static void listCompany() {
+	public  void listCompany() {
 		System.out.println("조회할 출판사 입력 >> ");
 		String company = scn.nextLine();
 		
@@ -159,7 +171,7 @@ public class BookMain {
 		}
 	} //end of listCompany().
 	
-	public static void bookInfo() {
+	public  void bookInfo() {
 		//반드시 값을 입력하도록
 		String title = "";
 		while (true) {
@@ -180,7 +192,7 @@ public class BookMain {
 	
 	///list와 listCompany에서 활용할 공통 메소드.
 	
-	public static Book[] searchList(String keyword) {
+	public  Book[] searchList(String keyword) {
 		Book[] list = new Book[100];
 		int idx =0;
 		for (int i=0; i< bookStore.length; i++) {
@@ -195,7 +207,7 @@ public class BookMain {
 	
 	
 	//도서명으로 조회하는 기능
-	public static Book searchBook(String title) {
+	public  Book searchBook(String title) {
 		for(int i=0; i<bookStore.length; i++) {
 			if (bookStore[i] != null && bookStore[i].getTitle().equals(title)) {
 				return bookStore[i];
@@ -205,7 +217,7 @@ public class BookMain {
 		}	//조회결과가 있으면 book 없으면 null 반환 
 	
 	//출판사 명으로 조회
-	public static void searchPublisher() {
+	public  void searchPublisher() {
 		System.out.println("조회할 출판사를 입력 >> ");
 		String publisher = scn.nextLine();
 		boolean isExist = false;
@@ -221,8 +233,9 @@ public class BookMain {
 		}
 	}//end of searchPublisher. 
 		
-	//등록, 수정, 삭제, 목록
-	public static void main(String[] args) {
+	//등록, 수정, 삭제, 목록  
+	///main 메소드가 static(정적 메소드)을 사용해서 아래 메소드를 따라가면 모두 동일하게 static
+	public  void main(String[] args) {
 //		Book book = new Book("이것이 자바다", "신용권", "한빛미디어", 20000);  //생성자
 //		book.setTitle("이것이 자바다");
 //		book.setAuthor("신용권"); //setter
@@ -267,7 +280,7 @@ public class BookMain {
 		}
 		System.out.println("프로그램을 종료합니다.");
 	}//end of main().
-	public static void init() {
+	public  void init() {
 		bookStore[0] = new Book("이것이자바다", "신용권", "한빛출", 20000, 1);
 		bookStore[1] = new Book("스크립트기초", "박기초", "우리출", 26000, 2);
 		bookStore[2] = new Book("HTML,SCC", "김하늘", "가람출", 25000, 3);

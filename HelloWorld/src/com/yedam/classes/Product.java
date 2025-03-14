@@ -9,6 +9,8 @@ public class Product {
 	private String productCode;
 	private String productName;
 	private int price;
+	//필드는 주로 인스턴스로 사용
+	//기능은 인스턴스, 정적 둘다 사용
 	
 	//필드에 대한 생성자
 	Product() {}
