@@ -14,14 +14,14 @@ public class FriendExe {
 		Friend f1 = new Friend();
 		f1.setName("홍길동");
 		f1.setTel("010-1111-2222");
-		System.out.println(f1.toString());
+//		System.out.println(f1.toString());
 		
 		UnivFriend f2 = new UnivFriend();
 		f2.setName("김자식");
 		f2.setTel("010-1111-1111");
 		f2.setUnivName("우리학교");
 		f2.setMajor("역사학과");
-		System.out.println(f2.toString());
+//		System.out.println(f2.toString());
 		
 		CompanyFriend f3 = new CompanyFriend("김영식", "010-2323-2323", "아마존", "개발팀");
 		System.out.println(f3.toString());
@@ -47,19 +47,13 @@ public class FriendExe {
 		CompanyFriend cf = (CompanyFriend) f4; //부모클래스 자식클래스 대입. (casting)
 		
 		Friend f5 = new Friend("박성길","010-1111-2222"); 
+		
 		if(f4 instanceof CompanyFriend) {
 			cf = (CompanyFriend) f4;       //f4 일땐  자회사 출력, f5일땐 예외처리
 			System.out.println(cf.getCompany());
 		}else {
 			System.out.println("Casting 할 수 없습니다.");
 		}
-		
-		
-		
-		
-		
-		
-				
 
 	}// end of main.
 }
