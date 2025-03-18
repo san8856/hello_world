@@ -265,17 +265,17 @@ public class BookMain {
 			System.out.println("1.도서등록 2.수정 3.삭제 4.목록 5.상세조회 6.목록조회(출판사) 9.종료");
 			System.out.print("선택>> ");
 			//예외처리		
-			int menu = 9;
-			while(true) { // 올바른 숫자가 들어올 때 까지 반복
-				try {
-					menu = Integer.parseInt(scn.nextLine());				
-					break; //올바른 숫자가 들어오면 멈추고 switch 로 넘어감
-				} catch (NumberFormatException e){
-					System.out.println("숫자를 입력해 주세요.");
-				}
-			}
+//			int menu = 9;
+//			while(true) { // 올바른 숫자가 들어올 때 까지 반복
+//				try {
+//					menu = Integer.parseInt(scn.nextLine());				
+//					break; //올바른 숫자가 들어오면 멈추고 switch 로 넘어감
+//				} catch (NumberFormatException e){
+//					System.out.println("숫자를 입력해 주세요.");
+//				}
+//			}
 			
-			
+			int menu = Integer.parseInt(scn.nextLine());
 			switch (menu) {
 			case 1: // 등록.
 				add();
@@ -296,8 +296,8 @@ public class BookMain {
 				listCompany();
 				break;
 			case 9: // 종료.
-				System.out.println("프로그램을 종료합니다.");
 				run = false;
+				System.out.println("프로그램을 종료합니다.");
 				break;
 			default:
 				System.out.println("메뉴를 다시 선택하세요");

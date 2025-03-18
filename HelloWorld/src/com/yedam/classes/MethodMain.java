@@ -1,5 +1,6 @@
 package com.yedam.classes;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class MethodMain {
@@ -27,10 +28,10 @@ public class MethodMain {
 			switch(menu) {
 			case 1: 
 				prd.setProductName("ALL");
-				Product[] list = m2.productList(prd);
-				for(int i=0; i<list.length; i++) {
-					if(list[i] != null){
-						System.out.println(list[i].showList());						
+				List<Product> list = m2.productList(prd);
+				for(int i=0; i<list.size(); i++) {
+					if(list.get(i) != null){
+						System.out.println(list.get(i).showList());						
 					}
 				}
 				break;
@@ -65,14 +66,15 @@ public class MethodMain {
 					System.out.println("삭제되었습니다.");
 				}
 				break;
-			case 5:
+			case 9:
 				run =false;
 				System.out.println("프로그램을 종료합니다.");
 				break;
 			default:
-				System.out.println("메뉴를 다시 선택해 주세요");			
+				System.out.println("메뉴를 다시 선택해 주세요");				
 			}			
 		}
+		System.out.println("end of prog.");
 	}
 
 	
@@ -142,11 +144,9 @@ public class MethodMain {
 			search.setProductName("ALL");//
 			search.setPrice(1000); //
 			
-			Product[] list = m2.productList(search);
-			for (int i = 0; i < list.length; i++) {
-				if (list[i] != null) {
-					System.out.println(list[i].showList());
-				}
+			List<Product> list = m2.productList(search);
+			for (int i = 0; i < list.size(); i++) {
+					System.out.println(list.get(i).showList());
 			}	
 		//end of main.
 		}
