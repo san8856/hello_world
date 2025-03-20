@@ -6,5 +6,5 @@ public class Fish extends Animal {
 	void sound() {
 		System.out.println("뻐끔뻐끔");
 	}
-	
+
 }

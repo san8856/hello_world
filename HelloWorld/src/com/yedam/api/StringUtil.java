@@ -1,45 +1,46 @@
 package com.yedam.api;
-	
+
 public class StringUtil {
-	
-	//1.성별
-	static String getGender(String ssn) {
+	// 1.성별
+	static String getGender(String ssn) {//
 		int pos = -1;
-		if(ssn.length() == 13 ) {
+		if (ssn.length() == 13) {
 			pos = 6;
-		}else if (ssn.length()== 14) {
+		} else if (ssn.length() == 14) {
 			pos = 7;
 		}
+//		pos = ssn.length() - 7;
 		char gNo = ssn.charAt(pos);
-			switch (gNo) {
-			case '1':
-			case '3':
-				return "남자입니다.";
-			case '2':
-			case '4':
-				return "여자입니다.";
-			default:
-				return "알수없음.";
-			} 
+		switch (gNo) {
+		case '1':
+		case '3':
+			return "남";
+		case '2':
+		case '4':
+			return "여";
+		default:
+			return "알수없음";
+		}
+//		return ""; // "남" 또는 "여" 반환.
 	}
-	
-	
-	//2파일명
+
+	// 2.파일명
 	static String getFileName(String file) {
 		return getFileName1(file);
 	}
-	
-	//3 파일확장자
+
+	// 3.파일확장자
 	static String getExtName(String file) {
-		String ext = file.substring(file.indexOf(".")+1);
+		String ext = file.substring(file.indexOf(".") + 1);
 		return ext;
 	}
 
 	static String getFileName1(String file) {
 		int pos = 0;
 		String fileName = "";
-		while (true){
-			int idx = file.indexOf("/", pos); //찾을 값, 찾을 위치의 시작값
+		// "c:/temp/orange.jpg"
+		while (true) {
+			int idx = file.indexOf("/", pos); // 찾을 값, 찾을 위치의 시작값.
 			if (idx == -1) {
 				fileName = file.substring(pos, file.indexOf("."));
 				break;
@@ -48,15 +49,11 @@ public class StringUtil {
 		}
 		return fileName;
 	}
-	
+
 	static String getFileName2(String file) {
 		String fileName = "";
-		fileName = file.substring(file.lastIndexOf("/")+1, file.indexOf("."));
+		fileName = file.substring(file.lastIndexOf("/") + 1, file.indexOf("."));
 		return fileName;
 	}
-	
-	
-	
-	
-	
+
 }

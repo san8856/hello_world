@@ -1,7 +1,7 @@
 package com.yedam.interfaces;
 /*
- * 2차 프로젝트
- * 등록(add),수정(modify),삭제(delete) 로 정의
+ * 2차 프로젝트.
+ * 등록(add), 수정(modify), 삭제(delete)
  */
 public class OracleDao implements Dao {
 	@Override

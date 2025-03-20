@@ -5,6 +5,5 @@ public class AnimalExe {
 		Animal animal = new Bird();
 		animal.sound();
 		animal.eat();
-		
 	}
 }

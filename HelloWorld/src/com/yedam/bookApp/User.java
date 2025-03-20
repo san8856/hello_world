@@ -9,9 +9,9 @@ public class User {
 		this.userId = userId;
 		this.userName = userName;
 		this.password = password;
-		
 	}
 
+	// getter, setter 정의.
 	public String getUserId() {
 		return userId;
 	}
@@ -35,5 +35,5 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 }
