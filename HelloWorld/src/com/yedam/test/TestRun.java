@@ -103,6 +103,7 @@ public class TestRun {
 		}
 	}
 
+
 	private static void reviewMenu() {
 		while (true) {
 			System.out.println("-----------------------------------------");
@@ -186,7 +187,7 @@ public class TestRun {
 				System.out.println();
 			}
 		}
-
+		System.out.println("예약가능: O 예약중: X 이용중: -");
 		System.out.println("\t'비회원은 객실 조회만 가능합니다.'");
 		System.out.println("뒤로가기: q");
 		System.out.println("___________________________________________");
@@ -211,9 +212,9 @@ public class TestRun {
 		for (Test room : rooms) {
 			String status = room.getRoomType();
 			if (status.equals("O"))
-				status = "o";
+				status = "O";
 			else if (status.equals("X"))
-				status = "x";
+				status = "X";
 			else if (status.equals("-"))
 				status = "-";
 
@@ -224,7 +225,6 @@ public class TestRun {
 		}
 		System.out.println("예약가능: O 예약중: X 이용중: -");
 		System.out.println("\n-----------------------------------------------");
-
 		System.out.print("예약하실 객실번호를 입력하세요 > ");
 		int roomNo = scn.nextInt();
 		scn.nextLine();

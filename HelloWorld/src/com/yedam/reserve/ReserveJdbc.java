@@ -112,45 +112,41 @@ public class ReserveJdbc {
 		}
 		return false;
 	}
-	
-	//예약확인
-	public List<Reservation> getReservations(String name, String tel) {
-		Connection conn = getConnect();
-	    List<Reservation> reservations = new ArrayList<>();
-	    String sql = "SELECT * FROM tbl_reserve WHERE reserve_name = ? AND reserve_tel = ?";
-	    
-	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-	        pstmt.setString(1, name);
-	        pstmt.setString(2, tel);
-	        ResultSet rs = pstmt.executeQuery();
 
-	        while (rs.next()) {
-	            reservations.add(new Reservation(
-	                rs.getInt("room_number"),
-	                rs.getString("reserve_name"),
-	                rs.getString("reserve_tel"),
-	                rs.getString("reserve_time")
-	            ));
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	    return reservations;
+	// 예약확인
+	public Reservation getReservation(String name, String tel) {
+		Connection conn = getConnect();
+		String sql = "SELECT room_no, reserve_name, reserve_tel, reserve_time FROM tbl_reserve "
+				+ "WHERE reserve_name = ? AND reserve_tel = ?";
+
+		try {
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.setString(2, tel);
+			ResultSet rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				return new Reservation(rs.getInt("room_no"), rs.getString("reserve_name"), rs.getString("reserve_tel"),
+						rs.getString("reserve_time"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null; // 예약 정보가 없을 경우
 	}
 
-	
-	//체크인
+	// 체크인
 	public boolean checkIn(int roomNo, String name) {
 		Connection conn = getConnect();
 		String checkSql = "SELECT * FROM tbl_reserve WHERE room_no = ? AND reserve_name = ?";
 		String updateSql = "UPDATE tbl_room SET room_type = '-' WHERE room_no = ?";
-		
+
 		try {
 			PreparedStatement checkStmt = conn.prepareStatement(checkSql);
 			checkStmt.setInt(1, roomNo);
 			checkStmt.setString(2, name);
 			ResultSet rs = checkStmt.executeQuery();
-			
+
 			if (rs.next()) {
 				PreparedStatement updateStmt = conn.prepareStatement(updateSql);
 				updateStmt.setInt(1, roomNo);
@@ -162,59 +158,115 @@ public class ReserveJdbc {
 		}
 		return false;
 	}
-	//체크아웃
+
+	// 체크아웃
 	public boolean checkOut(int roomNo, String name) {
 		Connection conn = getConnect();
 		String checkSql = "SELECT * FROM tbl_reserve WHERE room_no = ? AND reserve_name = ?";
 		String deleteSql = "DELETE FROM tbl_reserve WHERE room_no = ? AND reserve_name = ?";
 		String updateSql = "UPDATE tbl_room SET room_type = 'O' WHERE room_no = ?";
-		
+
 		try {
 			PreparedStatement checkStmt = conn.prepareStatement(checkSql);
 			checkStmt.setInt(1, roomNo);
 			checkStmt.setString(2, name);
 			ResultSet rs = checkStmt.executeQuery();
-			
+
 			if (rs.next()) {
 				PreparedStatement deleteStmt = conn.prepareStatement(deleteSql);
 				deleteStmt.setInt(1, roomNo);
 				deleteStmt.setString(2, name);
 				deleteStmt.executeUpdate();
-				
+
 				PreparedStatement updateStmt = conn.prepareStatement(updateSql);
 				updateStmt.setInt(1, roomNo);
 				updateStmt.executeUpdate();
-				return true;	
+				return true;
 			}
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
-	//후기작성
-	public boolean writeReview(String title, String content, String customerId) {
-		Connection conn = getConnect();
-		String sql = "INSERT INTO tbl_review (review_no, title, content, customer_id, write_date, view_cnt" +
-		"VALUES (review_seq.NEXTVAL, ?, ?, ?, SYSDATE, 0";
-		
-		try {
-			PreparedStatement psmt = conn.prepareStatement(sql);
-			psmt.setString(1, title);
-			psmt.setString(2, content);
-			psmt.setString(3, customerId);
-			
-			int result = psmt.executeUpdate();
-			return result > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
 	}
-	
-	
-	
-	
-	
-	
+
+	// 후기 작성
+	public boolean writeReview(String title, String content, String customerId) {
+	    Connection conn = getConnect();
+	    String sql = "INSERT INTO tbl_review (review_no, title, content, customer_id, write_date, view_cnt) " +
+	                 "VALUES (review_seq.NEXTVAL, ?, ?, ?, SYSDATE, 0)";
+
+	    try {
+	        PreparedStatement psmt = conn.prepareStatement(sql);
+	        psmt.setString(1, title);
+	        psmt.setString(2, content);
+	        psmt.setString(3, customerId);  // 👈 ID가 저장되도록 수정
+
+	        int result = psmt.executeUpdate();
+	        return result > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
+	//전체조회
+	public List<Review> getAllReviews() {
+		List<Review> reviewList = new ArrayList<>();
+		Connection conn = getConnect();
+		String sql = "SELECT review_no, title, customer_id, TO_CHAR(write_date, 'YY/MM/DD') AS write_date, view_cnt "
+				+ "FROM tbl_review ORDER BY review_no DESC";
+
+		try {
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			ResultSet rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				Review review = new Review(rs.getInt("review_no"), rs.getString("title"), rs.getString("customer_id"),
+						rs.getString("write_date"), rs.getInt("view_cnt"));
+				reviewList.add(review);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return reviewList;
+	}
+	//상세조회
+	public Review getReview(int reviewNo) {
+	    Connection conn = getConnect();
+	    String sql = "SELECT review_no, title, content, customer_id, TO_CHAR(write_date, 'YY/MM/DD') AS write_date, view_cnt " +
+	                 "FROM tbl_review WHERE review_no = ?";
+
+	    try {
+	        PreparedStatement psmt = conn.prepareStatement(sql);
+	        psmt.setInt(1, reviewNo);
+	        ResultSet rs = psmt.executeQuery();
+
+	        if (rs.next()) {
+	            return new Review(
+	                rs.getInt("review_no"),
+	                rs.getString("title"),
+	                rs.getString("content"),
+	                rs.getString("customer_id"),
+	                rs.getString("write_date"),
+	                rs.getInt("view_cnt")
+	            );
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+	//조회수 증가
+	public void updateViewCount(int reviewNo) {
+	    Connection conn = getConnect();
+	    String sql = "UPDATE tbl_review SET view_cnt = view_cnt + 1 WHERE review_no = ?";
+
+	    try {
+	        PreparedStatement psmt = conn.prepareStatement(sql);
+	        psmt.setInt(1, reviewNo);
+	        psmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
 }

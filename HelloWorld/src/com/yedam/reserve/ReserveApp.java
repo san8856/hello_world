@@ -105,19 +105,17 @@ public class ReserveApp {
 	private static void reviewMenu() {
 		while (true) {
 			System.out.println("-----------------------------------------");
-			System.out.println("1.후기 작성\n 2.전체후기 조회\n 3.제목+내용으로 검색\n 4.게시글 삭제\n 9.종료");
+			System.out.println("1.후기 작성\n2.전체후기 조회\n3.제목+내용으로 검색\n4.게시글 삭제\n9.종료");
 			System.out.println("_________________________________________");
 			System.out.println("선택 > ");
 			int reviewMenu = scn.nextInt();
-			
+
 			switch (reviewMenu) {
 			case 1:
-				System.out.println("후기작성");
 				writeReview();
 				break;
 			case 2:
-				System.out.println("전체조회");
-//				searchAll();
+				searchAll();
 				break;
 			case 3:
 				System.out.println("제목+내용으로 검색");
@@ -145,16 +143,15 @@ public class ReserveApp {
 		String pw = scn.nextLine();
 
 		Customer customer = dao.login(id, pw);
-
 		if (customer != null) {
 			loginUser = customer.getCustomerName();
-			System.out.println("로그인 성공" + "\n" + customer.getCustomerName() + "님, 어서오세요.");
+			System.out.println("로그인 성공\n" + customer.getCustomerName() + "님, 어서오세요.");
 		} else {
 			System.out.println("아이디 또는 비밀번호를 확인하세요.");
 		}
 	}
 
-	// 회원가입
+	// 회원가입 기능
 	private static void signUp() {
 		scn.nextLine();
 		System.out.print("새로운 ID 입력>> ");
@@ -173,7 +170,6 @@ public class ReserveApp {
 
 	// 비회원 객실목록 출력
 	private static void guest() {
-		ReserveJdbc dao = new ReserveJdbc();
 		List<Reservation> rooms = dao.roomList();
 		System.out.println("-----------------------------------------");
 		System.out.println("\t\t예약가능 객실");
@@ -200,7 +196,7 @@ public class ReserveApp {
 		}
 	}
 
-	// 객실예약
+	// 객실 예약 기능
 	private static void reserveRoom() {
 		List<Reservation> rooms = dao.roomList();
 		System.out.println("-----------------------------------------");
@@ -209,13 +205,6 @@ public class ReserveApp {
 		int count = 0;
 		for (Reservation room : rooms) {
 			String status = room.getRoomType();
-			if (status.equals("O"))
-				status = "O";
-			else if (status.equals("X"))
-				status = "X";
-			else if (status.equals("-"))
-				status = "-";
-
 			System.out.printf("%d호: %s |", room.getRoomNumber(), status);
 			count++;
 			if (count % 5 == 0)
@@ -223,14 +212,14 @@ public class ReserveApp {
 		}
 		System.out.println("예약가능: O 예약중: X 이용중: -");
 		System.out.println("___________________________________________");
-		System.out.println("예약하실 객실번호를 입력하세요 > ");
+		System.out.print("예약하실 객실번호를 입력하세요 > ");
 		int roomNo = scn.nextInt();
 		scn.nextLine();
 
-		System.out.println("이름을 입력하세요 > ");
+		System.out.print("이름을 입력하세요 > ");
 		String name = scn.nextLine();
 
-		System.out.println("연락처를 입력하세요 > ");
+		System.out.print("연락처를 입력하세요 > ");
 		String tel = scn.nextLine();
 
 		if (dao.reserveRoom(roomNo, name, tel)) {
@@ -240,32 +229,26 @@ public class ReserveApp {
 		}
 	}
 
-	// 예약확인
+	// 예약 확인
 	private static void checkReserve() {
-	    scn.nextLine(); // 버퍼 비우기
-	    System.out.println("예약자명 입력 > ");
-	    String name = scn.nextLine();
+		scn.nextLine();
+		System.out.println("예약자명 입력 > ");
+		String name = scn.nextLine();
+		System.out.println("예약자연락처 입력 > ");
+		String tel = scn.nextLine();
 
-	    System.out.println("예약자연락처 입력 > ");
-	    String tel = scn.nextLine();
-
-	    List<Reservation> reservations = dao.getReservations(name, tel);
-
-	    if (!reservations.isEmpty()) {
-	        System.out.println("-----------------------------------------");
-	        System.out.println("총 예약 개수: " + reservations.size());
-	        for (Reservation res : reservations) {
-	            System.out.println("객실 번호: " + res.getRoomNumber() + "호");
-	            System.out.println("예약자명: " + res.getReserveName());
-	            System.out.println("연락처: " + res.getReserveTel());
-	            System.out.println("예약일: " + res.getReserveDate());
-	            System.out.println("-----------------------------------------");
-	        }
-	    } else {
-	        System.out.println("예약정보를 다시 확인해주세요");
-	    }
+		Reservation reservation = dao.getReservation(name, tel);
+		if (reservation != null) {
+			System.out.println("-----------------------------------------");
+			System.out.println("객실 번호: " + reservation.getRoomNumber() + "호");
+			System.out.println("예약자명: " + reservation.getReserveName());
+			System.out.println("연락처: " + reservation.getReserveTel());
+			System.out.println("예약일: " + reservation.getReserveDate());
+			System.out.println("-----------------------------------------");
+		} else {
+			System.out.println("예약정보를 다시 확인해주세요");
+		}
 	}
-
 
 	// 체크인 기능
 	private static void checkIn() {
@@ -282,7 +265,8 @@ public class ReserveApp {
 			System.out.println("예약정보를 다시 확인해주세요.");
 		}
 	}
-	//체크아웃
+
+	// 체크아웃 기능
 	private static void checkOut() {
 		System.out.println("객실번호를 입력해주세요 > ");
 		int roomNo = scn.nextInt();
@@ -297,20 +281,76 @@ public class ReserveApp {
 			System.out.println("예약정보를 다시 확인해주세요.");
 		}
 	}
-	// 후기작성
+
+	// 후기 작성
 	private static void writeReview() {
 		scn.nextLine();
 		System.out.println("제목을 입력하세요 > ");
 		String title = scn.nextLine();
-		
+
 		System.out.println("내용을 입력하세요 > ");
 		String content = scn.nextLine();
-		
-		if(dao.writeReview(title, content, loginUser)) {
+
+		if (dao.writeReview(title, content, loginUser)) {
 			System.out.println("게시글이 작성되었습니다.");
-		}else {
+		} else {
 			System.out.println("게시글이 작성되지 않았습니다.");
 		}
+	}
+
+	// 전체 리뷰 조회
+	private static void searchAll() {
+		List<Review> reviews = dao.getAllReviews();
+		System.out.println("----------------------------------------------");
+		System.out.println("번호\t제목\t작성자\t작성일\t조회수");
+
+		for (Review review : reviews) {
+			System.out.printf("%d\t%s\t%s\t%s\t%d\n", review.getReviewNo(), review.getTitle(), review.getCustomerId(),
+					review.getWriteDate(), review.getViewCnt());
+		}
+
+		System.out.println("열람할 글의 번호를 입력하세요>    메뉴로 이동 : q");
+		System.out.print("입력 > ");
+		String input = scn.next();
+
+		if (!input.equalsIgnoreCase("q")) {
+			try {
+				int reviewNo = Integer.parseInt(input);
+				readReview(reviewNo);
+			} catch (NumberFormatException e) {
+				System.out.println("다시 입력해주세요.");
+			}
+		}
+	}
+
+	// 상세조회
+	private static void readReview(int reviewNo) {
+		dao.updateViewCount(reviewNo);
+		Review review = dao.getReview(reviewNo);
+
+		if (review == null) {
+			System.out.println("게시글의 번호를 확인해주세요.");
+			return;
+		}
+		System.out.println("----------------------------------------------");
+		System.out.println("번호: " + review.getReviewNo());
+		System.out.println("제목: " + review.getTitle());
+		System.out.println("작성자: " + review.getCustomerId());
+		System.out.println("작성일: " + review.getWriteDate());
+		System.out.println("조회수: " + review.getViewCnt());
+		System.out.println("내용: \n" + review.getContent());
+		System.out.println("----------------------------------------------");
+
+		System.out.println("메뉴로 이동: q");
+		System.out.print("입력 > ");
+		String input = scn.next();
+
+		while (!input.equalsIgnoreCase("q")) {
+			System.out.println("뒤로 가려면 'q' 를 입력하세요.");
+			System.out.print("입력 > ");
+			input = scn.next();
+		}
+
 	}
 
 }
