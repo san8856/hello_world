@@ -159,12 +159,13 @@ public class ReserveJdbc {
 		Connection conn = getConnect();
 		String sql = "SELECT room_no, reserve_name, reserve_tel, reserve_time FROM tbl_reserve "
 				+ "WHERE reserve_name = ? AND reserve_tel = ?";
-
+	    PreparedStatement psmt = null;
+	    ResultSet rs = null;
 		try {
-			PreparedStatement psmt = conn.prepareStatement(sql);
+			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, name);
 			psmt.setString(2, tel);
-			ResultSet rs = psmt.executeQuery();
+			rs = psmt.executeQuery();
 
 			if (rs.next()) {
 				return new Reservation(rs.getInt("room_no"), rs.getString("reserve_name"), rs.getString("reserve_tel"),
@@ -172,7 +173,15 @@ public class ReserveJdbc {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		} finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (psmt != null) psmt.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 		return null; // 예약 정보가 없을 경우
 	}
 
@@ -415,6 +424,7 @@ public class ReserveJdbc {
 	    }
 		return reviewList;
 	}
+	//삭제
 	public boolean deleteReview(int reviewNo, String userId) {
 	    Connection conn = getConnect();
 	    String checkSql = "SELECT customer_id FROM tbl_review WHERE review_no = ?";
@@ -427,7 +437,7 @@ public class ReserveJdbc {
 	    try {
 	        conn.setAutoCommit(false); // 트랜잭션 시작
 
-	        // 1️⃣ 삭제할 리뷰의 작성자 확인
+	        // 리뷰의 작성자 확인
 	        checkPsmt = conn.prepareStatement(checkSql);
 	        checkPsmt.setInt(1, reviewNo);
 	        rs = checkPsmt.executeQuery();
@@ -443,7 +453,7 @@ public class ReserveJdbc {
 	            return false;
 	        }
 
-	        // 2️⃣ 리뷰 삭제
+	        // 2리뷰 삭제
 	        deletePsmt = conn.prepareStatement(deleteSql);
 	        deletePsmt.setInt(1, reviewNo);
 	        int rowsAffected = deletePsmt.executeUpdate();
@@ -462,7 +472,6 @@ public class ReserveJdbc {
 	            rollbackEx.printStackTrace();
 	        }
 	    } finally {
-	        // 리소스 해제
 	        try {
 	            if (rs != null) rs.close();
 	            if (checkPsmt != null) checkPsmt.close();
