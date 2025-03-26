@@ -117,16 +117,13 @@ public class TestRun {
 				writeReview();
 				break;
 			case 2:
-				System.out.println("전체조회");
 				searchAll();
 				break;
 			case 3:
-				System.out.println("제목+내용으로 검색");
-//				searchReview();
+				searchReview();
 				break;
 			case 4:
-				System.out.println("후기 삭제");
-//				deleteReview();
+				deleteReview();
 				break;
 			case 9:
 				System.out.println("종료");
@@ -368,6 +365,69 @@ public class TestRun {
 	        System.out.println("잘못된 입력입니다. 뒤로 가려면 'm'을 입력하세요.");
 	        System.out.print("입력> ");
 	        input = scn.next();
+	    }
+	}
+	private static void searchReview() {
+		scn.nextLine();
+		System.out.println("검색할 제목 또는 내용을 입력하세요 > ");
+		String keyword = scn.nextLine();
+
+		List<Review> reviews = dao.searchKeyword(keyword);
+
+		if (reviews.isEmpty()) {
+			System.out.println("일치하는 결과가 없습니다.");
+			return;
+		}
+		System.out.println("----------------------------------------------");
+		System.out.println("번호\t제목\t작성자\t작성일\t조회수");
+
+		for (Review review : reviews) {
+			System.out.printf("%d\t%S\t%s\t%s\t%d\n", review.getReviewNo(), review.getTitle(), review.getCustomerId(),
+					review.getWriteDate(), review.getViewCnt());
+		}
+		System.out.println("______________________________________________");
+		System.out.println("열람할 글의 번호를 입력하세요.    메뉴로 이동 : q");
+		System.out.print("입력 > ");
+		String input = scn.next();
+
+		if (input.equalsIgnoreCase("q")) {
+            return;
+        }
+
+        try {
+            int reviewNo = Integer.parseInt(input);
+            readReview(reviewNo); // 상세 조회 기능 호출
+            return;
+        } catch (NumberFormatException e) {
+				System.out.println("다시 입력해주세요.");
+			}
+		}
+	
+	// 리뷰 삭제 기능
+	private static void deleteReview() {
+	    System.out.print("삭제할 게시글의 번호를 입력하세요 > ");
+	    
+	    if (!scn.hasNextInt()) {
+	        System.out.println("게시글 번호를 확인해주세요.");
+	        scn.next(); // 잘못된 입력 제거
+	        return;
+	    }
+	    
+	    int reviewNo = scn.nextInt();
+	    
+	    // 삭제 확인 메시지
+	    System.out.print("정말 삭제하시겠습니까? (y/n) > ");
+	    String confirm = scn.next();
+
+	    if (!confirm.equalsIgnoreCase("y")) {
+	        System.out.println("삭제가 취소되었습니다.");
+	        return;
+	    }
+
+	    boolean result = dao.deleteReview(reviewNo, loginUser); // DAO에서 삭제 실행
+
+	    if (result) {
+	        System.out.println("리뷰가 삭제되었습니다.");
 	    }
 	}
 
