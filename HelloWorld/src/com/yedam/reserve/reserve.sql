@@ -34,7 +34,7 @@ drop table tbl_review;
                   customer_name)
  values ('user01',
          '1234',
-         'ȫ�浿'
+         '홍길동'
      );
      
 insert into tbl_room (room_no,
@@ -53,14 +53,18 @@ UPDATE TBL_ROOM
 SET ROOM_TYPE = 'O'
 WHERE room_no = 505;
 
---name�� id�� �ԷµǴ� ���� �ذ�
+--리뷰테이블 name에 id가 입력되는 문제 해결
 UPDATE tbl_review r
 SET r.customer_id = (SELECT c.customer_id FROM tbl_customer c WHERE c.customer_name = r.customer_id)
 WHERE EXISTS (SELECT 1 FROM tbl_customer c WHERE c.customer_name = r.customer_id);
 
 
---��ȸ��
+--사용중인 시퀀스와 시퀀스 삭제
+SELECT SEQUENCE_NAME FROM USER_SEQUENCES;
+DROP SEQUENCE seq_review; 
+--시퀀스 생성
 CREATE SEQUENCE review_seq
     START WITH 1
     INCREMENT BY 1
-    NOCACHE;
+    NOCACHE
+    NOCYCLE;
