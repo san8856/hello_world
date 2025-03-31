@@ -14,7 +14,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.yedam.common.DataSource;
-import com.yedam.dao.BoardDAO;
 import com.yedam.vo.BoardVO;
 
 /*
@@ -41,7 +40,7 @@ public class MainServlet extends HttpServlet {
 //		BoardDAO dao = new BoardDAO();
 //		List<BoardVO> list = dao.boardList();
 
-		SqlSessionFactory sqlSessionFactory = DataSource.getInstence();
+		SqlSessionFactory sqlSessionFactory = DataSource.getInstance();
 		try (SqlSession session = sqlSessionFactory.openSession()) {
 			List<BoardVO> list = session.selectList("com.yedam.mapper.BoardMapper.selectBoard");
 
@@ -53,7 +52,7 @@ public class MainServlet extends HttpServlet {
 			for (BoardVO board : list) {
 				html += "<tr>";
 				html += "<td>" + board.getBoardNo() + "</td>";
-				html += "<td>" + board.getTitle() + "</td>";
+				html += "<td><a href='getBoard?board_no="+board.getBoardNo()+"'>" + board.getTitle() + "</a></td>";
 				html += "<td>" + board.getWriter() + "</td>";
 				html += "<td>" + board.getWriteDate() + "</td>";
 				html += "</tr>";

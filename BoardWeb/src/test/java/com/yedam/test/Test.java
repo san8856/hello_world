@@ -11,7 +11,7 @@ import com.yedam.vo.BoardVO;
 
 public class Test {
 	public static void main(String[] args) {
-		SqlSessionFactory sqlSessionFactory = DataSource.getInstence();		
+		SqlSessionFactory sqlSessionFactory = DataSource.getInstance();		
 		
 		BoardVO board = new BoardVO();
 		board.setTitle("매퍼테스트55");

@@ -13,6 +13,7 @@
     	,content
     	,write_date
     	from tbl_board
+    	order by board_no desc
   </select>
   
   <!-- 등록. -->
@@ -37,6 +38,23 @@
   from tbl_board
   where board_no = #{boardNo}
   </delete>
+  
+  <!-- 상세보기 -->
+  <select id="selectOne" parameterType="int" resultType="board">
+    select board_no
+    	,title
+    	,writer
+    	,content
+    	,write_date
+    	from tbl_board
+    	where board_no = #{board_no}
+  </select>
+  
+  
+  
+  
+  
+  
   
   
 </mapper>
