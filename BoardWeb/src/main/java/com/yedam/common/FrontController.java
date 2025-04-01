@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.yedam.control.AddBoardControl;
 import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
+import com.yedam.control.ModifyBoardControl;
+import com.yedam.control.ModifyFormControl;
+import com.yedam.control.DeleteBoardControl;
+import com.yedam.control.DeleteFormControl;
 
 // *.do 로 끝나는 요청에 대해서 실행.
 public class FrontController extends HttpServlet {
@@ -31,6 +35,10 @@ public class FrontController extends HttpServlet {
 		map.put("/board.do", new BoardControl());//상세화면
 		map.put("/boardList.do", new BoardListControl());//글목록
 		map.put("/addBoard.do", new AddBoardControl());//글등록 AddBoardControl
+		map.put("/modifyForm.do", new ModifyFormControl());//수정 화면
+		map.put("/modifyBoard.do", new ModifyBoardControl());//수정 기능
+		map.put("/deleteForm.do", new DeleteFormControl());//삭제화면
+		map.put("/deleteBoard.do", new DeleteBoardControl());//삭제기능
 	}
 
 	// service
