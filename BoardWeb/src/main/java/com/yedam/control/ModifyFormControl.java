@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -24,12 +25,23 @@ public class ModifyFormControl implements Control {
 		
 		SqlSession sqlSession = DataSource.getInstance().openSession();
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
-		
 		BoardVO board = mapper.selectOne(Integer.parseInt(bno));
+
+		//권한 체크.
+		HttpSession session = req.getSession();
+		String logId = (String) session.getAttribute("logId");
+		
 		req.setAttribute("board", board);
 		req.setAttribute("page", page);
+
+		if (logId != null && logId.equals(board.getWriter())) {
+			//board.jsp 전달.
+			req.getRequestDispatcher("/WEB-INF/views/modifyBoard.jsp").forward(req, resp);
+		} else {
+			req.setAttribute("msg", "권한이 없습니다.");
+			req.getRequestDispatcher("/WEB-INF/views/board.jsp").forward(req, resp);
+		}
 		
-		req.getRequestDispatcher("/WEB-INF/views/modifyBoard.jsp").forward(req, resp);
 	}
 
 }

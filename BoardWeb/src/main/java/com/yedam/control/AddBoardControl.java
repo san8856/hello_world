@@ -35,6 +35,7 @@ public class AddBoardControl implements Control {
 			board.setWriter(writer);
 			board.setContent(content);
 
+			//mybatis 를 활용한 jdbc 처리
 			SqlSession sqlSession = DataSource.getInstance().openSession(true);
 			BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 			int r = mapper.insertBoard(board);
