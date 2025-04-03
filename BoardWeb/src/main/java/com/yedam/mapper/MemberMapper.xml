@@ -12,5 +12,10 @@
 		and	  password = #{pw}
 	</select>
  
+ <insert id ="insertMember" parameterType="member">
+   insert into tbl_member (user_id, user_name, password, responsibility ,images)
+   values(#{userId}, #{userName}, #{password}, 'User', #{images})
+ </insert>
+ 
  
 </mapper>

@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.control.AddBoardControl;
+import com.yedam.control.AuthentifyControl;
 import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
 import com.yedam.control.ModifyBoardControl;
 import com.yedam.control.ModifyFormControl;
+import com.yedam.control.SignUpControl;
 import com.yedam.control.MainControl;
 import com.yedam.control.DeleteBoardControl;
 import com.yedam.control.DeleteFormControl;
@@ -37,6 +39,7 @@ public class FrontController extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		map.put("/main.do", new MainControl()); //메인화면
+		
 		map.put("/board.do", new BoardControl());//상세화면
 		map.put("/boardList.do", new BoardListControl());//글목록
 		map.put("/addBoard.do", new AddBoardControl());//글등록 AddBoardControl
@@ -48,6 +51,11 @@ public class FrontController extends HttpServlet {
 		map.put("/loginForm.do", new LoginFormControl()); //로그인 화면
 		map.put("/login.do", new LoginControl()); //로그인처리
 		map.put("/logout.do", new LogoutControl()); //로그아웃.
+		
+		map.put("/signForm.do", new SignUpControl()); //회원가입
+		map.put("/signUp.do", new SignUpControl()); // 회원등록
+		map.put("/authentify.do", new AuthentifyControl());
+		
 	}
 
 	// service

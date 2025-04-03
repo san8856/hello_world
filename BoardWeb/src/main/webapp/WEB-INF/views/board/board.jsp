@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<jsp:include page="includes/header.jsp"/>
 	<!-- webapp/WEB-INF/views/board.jsp -->
 
 	<h3>상세조회 페이지(board.jsp)</h3>
@@ -57,4 +56,3 @@
 		location.href = 'deleteForm.do?bno=${board.boardNo}'; //삭제 화면 이동 -> 삭제처리.
 	}	
 	</script>
-<jsp:include page="includes/footer.jsp"/>

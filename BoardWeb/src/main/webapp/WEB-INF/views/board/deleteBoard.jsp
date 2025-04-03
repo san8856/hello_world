@@ -1,7 +1,7 @@
 <%@page import="com.yedam.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="includes/header.jsp" />
+	
 <h3>게시글 삭제</h3>
 <% 
   BoardVO board = (BoardVO) request.getAttribute("board");
@@ -40,4 +40,3 @@
 
 
 
-<jsp:include page="includes/footer.jsp" />

@@ -14,5 +14,9 @@ public class MemberServiceDAO implements MemberService {
 	public MemberVO login(String id, String pw) {
 		return null;
 	}
-
+	@Override
+	public boolean addMember(MemberVO member) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

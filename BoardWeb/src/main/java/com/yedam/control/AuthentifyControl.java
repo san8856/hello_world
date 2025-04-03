@@ -5,22 +5,16 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.yedam.common.Control;
 
-public class MainControl implements Control {
+public class AuthentifyControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
-		String logId = (String) session.getAttribute("logId");
-
-//		if (logId == user) {
-//			resp.sendRedirect("loginForm.do");
-//		}else {
-			req.getRequestDispatcher("board/main.tiles").forward(req, resp);
-		}
+		// 비밀번호 변경
+		
+		req.getRequestDispatcher("member/passwordForm.tiles").forward(req, resp);
 	}
 
-//}
+}
