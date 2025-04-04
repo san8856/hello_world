@@ -4,6 +4,7 @@
 	<!-- 폼 태그 안에서 name 속성으로 구분, 서블릿작성?title=title&writer=user01&content=content ? 뒤에 name = 내용 -> key = value 형식-->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+	<h3>글작성(addForm.jsp)</h3>
 	<form action = "addBoard.do" method="post">  <!-- <form action = "addBoard"> -->
 	  <table class="table">
 	    <tr>

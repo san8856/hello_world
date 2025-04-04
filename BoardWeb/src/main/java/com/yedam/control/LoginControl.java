@@ -38,7 +38,7 @@ public class LoginControl implements Control {
 			
 			if(mvo.getResponsibility().equals("User")) {
 //				resp.sendRedirect("boardList.do");
-				req.getRequestDispatcher("board/main.tiles").forward(req, resp);
+				req.getRequestDispatcher("member/main.tiles").forward(req, resp);
 			} else if (mvo.getResponsibility().equals("Admin")) {
 				req.getRequestDispatcher("manager/main.tiles").forward(req, resp);
 				

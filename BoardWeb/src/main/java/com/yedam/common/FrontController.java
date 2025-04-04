@@ -20,6 +20,7 @@ import com.yedam.control.SignUpControl;
 import com.yedam.control.MainControl;
 import com.yedam.control.DeleteBoardControl;
 import com.yedam.control.DeleteFormControl;
+import com.yedam.control.JSControl;
 import com.yedam.control.LoginControl;
 import com.yedam.control.LoginFormControl;
 import com.yedam.control.LogoutControl;
@@ -55,6 +56,8 @@ public class FrontController extends HttpServlet {
 		map.put("/signForm.do", new SignUpControl()); //회원가입
 		map.put("/signUp.do", new SignUpControl()); // 회원등록
 		map.put("/authentify.do", new AuthentifyControl());
+		
+		map.put("/javascript.do", new JSControl());
 		
 	}
 

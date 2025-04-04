@@ -5,7 +5,7 @@
   <!-- webapp/WEB_INF/views/boardList.jsp -->
 
   <!-- blist, pasing, searchCondition, keyword -->
-  <h3>게시글 목록</h3>
+  <h3>게시글 목록(boardList.jsp)</h3>
   <!-- 검색조건. -->
   <form action="boardList.do">
   <div class="row">

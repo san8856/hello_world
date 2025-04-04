@@ -17,6 +17,6 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="logout.do">로그아웃(<%=logId %>)</a>
                     <%} %>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="signForm.do">회원가입</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript.do">JS연습</a>
                 </div>
             </div>
