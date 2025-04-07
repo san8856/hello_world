@@ -23,7 +23,7 @@ function successCallback(result) {
 function errorCallback(err) {
 	console.error(err);
 }
-
+ 
 //삭제함수
 function deleteFnc(rno) {
 	let deleteOK = confirm("삭제하시겠습니까?");
