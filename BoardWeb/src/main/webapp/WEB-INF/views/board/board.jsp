@@ -47,8 +47,44 @@
         <tr><td align="center" style="color: red;" colspan="4">${msg }</td></tr>
         </c:if>
 	</table>
-	</form>
+	</form> 
+	  <!-- 댓글관련 -->
+	  <style>
+	    div.reply span {
+	      display: inline-block;
+	    }
+	    div.reply ul {
+	    list-style-type: none;
+	    }
+	  </style>
+	  
+	<div class="container reply">
+	
+ 	  <!-- 등록. -->
+ 	  <div class="header">
+ 	    <input class="col-sm-8" id="reply">
+ 	    <button class="col-sm-3 btn btn-primary addReply">댓글등록</button>
+ 	  </div>
+ 	  <!-- 목록. -->
+ 	  <div class="content">
+ 	    <ul>
+ 	      
+ 	      <li>
+ 	        <span class="col-sm-2">글번호</span>
+ 	        <span class="col-sm-5">내용</span>
+ 	        <span class="col-sm-2">작성자</span>
+ 	        <span class="col-sm-2">삭제</span>
+ 	      </li>
+ 	    </ul>
+ 	  </div>
+ 	  
+ 	  <!-- 페이징. -->
+	
+	</div>
+
 	<script>
+	const bno = "${board.boardNo}";
+	const replyer = "${logId}";
 	//삭제버튼 이벤트 등록.
 	document.querySelector('button.btn.btn-danger').addEventListener('click', deleteFnc);
 	//삭제 함수
@@ -56,3 +92,5 @@
 		location.href = 'deleteForm.do?bno=${board.boardNo}'; //삭제 화면 이동 -> 삭제처리.
 	}	
 	</script>
+	<script src="js/boardService.js"></script>
+	<script src="js/board1.js"></script>
