@@ -40,17 +40,8 @@ function deleteFnc(rno) {
 
 			}
 		}
-		, errorCallback);n
-				makeRow2(item);
-			} else {
-				alert('등록실패...');
-				//입력값 초기화
-//				document.querySelector('#reply').value
-//				document.querySelector('#reply').value
-			}
-		}, errorCallback);
-
-})
+		, errorCallback)
+}
 
 //목록보여주기
 svc.replyList(bno, successCallback, errorCallback)
