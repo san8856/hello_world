@@ -23,6 +23,7 @@ function successCallback(result) {
 function errorCallback(err) {
 	console.error(err);
 }
+
  
 //삭제함수
 function deleteFnc(rno) {
@@ -71,6 +72,26 @@ document.querySelector('button.addReply').addEventListener('click', function(e) 
 		}, errorCallback);
 
 })
+
+
+//삭제함수
+function deleteFnc(rno) {
+	let deleteOK = confirm("삭제하시겠습니까?");
+	if (!deleteOK) {
+		return;
+	}
+	svc.removeReply(rno//삭제할 댓들번호
+		, function(result) {
+			console.log(result); //{retCode: 'OK/NG'}
+			if (result.retCode == 'OK') {
+				alert("삭제되었습니다.")
+				//id 속성으로 찾기
+				document.querySelector('#rno_' + rno).remove();
+
+			}
+		}
+		, errorCallback)
+}
 
 //목록보여주기
 svc.replyList(bno, successCallback, errorCallback)
