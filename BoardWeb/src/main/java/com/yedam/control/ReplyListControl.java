@@ -11,6 +11,7 @@ import com.yedam.common.Control;
 import com.yedam.service.ReplyService;
 import com.yedam.service.ReplyServiceImpl;
 import com.yedam.vo.ReplyVO;
+import com.yedam.vo.SearchDTO;
 
 public class ReplyListControl implements Control {
 
@@ -19,8 +20,13 @@ public class ReplyListControl implements Control {
 		resp.setContentType("text/json;charset=utf-8");
 		// 글번호(152) 댓글 데이터. (json).
 		String bno = req.getParameter("bno"); //원본 글 번호.
+		String page = req.getParameter("page"); //페이지 정보.
+		SearchDTO search = new SearchDTO();
+		search.setBoardNo(Integer.parseInt(bno));
+		search.setPage(Integer.parseInt(page));
+		
 		ReplyService svc = new ReplyServiceImpl();
-		List<ReplyVO> list = svc.replyList(Integer.parseInt(bno));
+		List<ReplyVO> list = svc.replyList(search); 
 		// [{"replyNo": 10, "reply": "댓글", ...}, {}, {}...{}] -> json 형식의 문자열
 		String json = "[";
 		for(int i=0; i<list.size(); i++) {

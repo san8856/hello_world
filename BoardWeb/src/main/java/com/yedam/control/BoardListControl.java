@@ -32,7 +32,7 @@ public class BoardListControl implements Control{
 		search.setSearchCondition(sc);
 		search.setPage(Integer.parseInt(page));
 		
-		//글목록
+		//글목록정보 -> jsp
 		SqlSession sqlSession = DataSource.getInstance().openSession();	
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		List<BoardVO> list = mapper.selectBoard(search);
@@ -46,7 +46,7 @@ public class BoardListControl implements Control{
 		req.setAttribute("keyword", kw);
 		
 		//boardList.do -> jsp 출력. : 페이지 재지정.
-		req.getRequestDispatcher("board/boardList.tiles").forward(req, resp);
+		req.getRequestDispatcher("board/boardList2.tiles").forward(req, resp);
 		
 		
 	}

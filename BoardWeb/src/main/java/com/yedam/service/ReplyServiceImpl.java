@@ -1,12 +1,14 @@
 package com.yedam.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.yedam.common.DataSource;
 import com.yedam.mapper.ReplyMapper;
 import com.yedam.vo.ReplyVO;
+import com.yedam.vo.SearchDTO;
 
 //ReplyService 인터페이스를 구현하는 클래스.
 public class ReplyServiceImpl implements ReplyService {
@@ -17,8 +19,8 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	
 	@Override
-	public List<ReplyVO> replyList(int boardNo) {
-		return mapper.selectList(boardNo);
+	public List<ReplyVO> replyList(SearchDTO search) {
+		return mapper.selectList(search);
 	}
 
 	@Override
@@ -35,5 +37,18 @@ public class ReplyServiceImpl implements ReplyService {
 	public ReplyVO getReply(int replyNo) {
 		return mapper.selectReply(replyNo);
 	}
+
+	@Override
+	public int getTotalCnt(int boardNo) {
+		return mapper.selectReplyCnt(boardNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> replyListForDT(int boardNo) {
+		// Datatable용 기능.
+		return mapper.selectListForDT(boardNo);
+	}
+
+
 	
 }
