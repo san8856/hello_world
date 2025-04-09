@@ -7,10 +7,27 @@
 <mapper namespace="com.yedam.mapper.EventMapper">
 
 <select id="getEvents" resultType="map">
-  SELECT title, start_date, end_date
-  FROM tbl_event
+  SELECT title, 
+  		 start_date, 
+  		 end_date
+  FROM   tbl_event
 </select>
 
+<insert id="insertEvent" parameterType="EventVO">
+	INSERT INTO tbl_event(
+	            title
+	           ,start_date
+	           ,end_date)
+	VALUES(#{title}
+	      ,#{startDate}
+	      ,#{endDate})           
+</insert>
 
+<delete id="deleteEvent" parameterType="EventVO">
+	DELETE FROM tbl_event
+	WHERE       title = #{title}
+	  AND       start_date = #{startDate}
+	  AND		end_date = #{endDate}
+</delete>
 
 </mapper>

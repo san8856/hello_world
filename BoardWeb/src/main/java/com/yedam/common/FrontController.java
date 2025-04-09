@@ -76,6 +76,7 @@ public class FrontController extends HttpServlet {
 		map.put("/replyListDatatable.do", new RLDatatableControl()); //datatable 연습용
 		
 		//fullcalender관련.
+		
 		map.put("/eventForm.do", new EventFormControl()); //캘린터 메인
 		map.put("/addEvent.do", new AddEventControl()); //일정 등록
 		map.put("/removeEvent.do", new RemoveEventControl()); //일정삭제
@@ -87,13 +88,15 @@ public class FrontController extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		  // url vs. uri
 		  // http://localhost:8080[/BoardWeb/board.do] []-> uri
+		
 		String uri = req.getRequestURI();
 //		System.out.println("요청 URI: " + uri); // /BoardWeb/board.do
 		String context = req.getContextPath();
 		String page = uri.substring(context.length()); // "/board.do"
 		System.out.println(page);
-
+		
 		Control sub = map.get(page); // 키(url) => control 반환.
+
 		sub.exec(req, resp);
 
 	}

@@ -33,13 +33,7 @@ public class AddEventControl implements Control {
 		evo.setEndDate(endDate);
 		System.out.println(evo);
 		
-        System.out.println("받은 이벤트 정보: " + evo);
-
-        SqlSession sqlSession = DataSource.getInstance().openSession(true);
-		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
-		
         EventService service = new EventServiceImpl();
-
         boolean result = service.addEvent(evo);
 
         String json = "";
@@ -48,7 +42,6 @@ public class AddEventControl implements Control {
         } else {
             json = "{\"retCode\": \"NG\"}";
         }
-
         resp.getWriter().print(json);
 		
 	}

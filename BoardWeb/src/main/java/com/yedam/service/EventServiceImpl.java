@@ -30,7 +30,6 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public List<Map<String, Object>> getEvents() {
-
 	    return mapper.getEvents();
 	}
 }
