@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.control.AddBoardControl;
+import com.yedam.control.AddEventControl;
 import com.yedam.control.AddReplyControl;
 import com.yedam.control.AuthentifyControl;
 import com.yedam.control.BoardControl;
@@ -18,6 +19,7 @@ import com.yedam.control.BoardListControl;
 import com.yedam.control.ModifyBoardControl;
 import com.yedam.control.ModifyFormControl;
 import com.yedam.control.RLDatatableControl;
+import com.yedam.control.RemoveEventControl;
 import com.yedam.control.RemoveReplyControl;
 import com.yedam.control.ReplyCountControl;
 import com.yedam.control.ReplyListControl;
@@ -25,6 +27,8 @@ import com.yedam.control.SignUpControl;
 import com.yedam.control.MainControl;
 import com.yedam.control.DeleteBoardControl;
 import com.yedam.control.DeleteFormControl;
+import com.yedam.control.EventFormControl;
+import com.yedam.control.EventListControl;
 import com.yedam.control.JSControl;
 import com.yedam.control.LoginControl;
 import com.yedam.control.LoginFormControl;
@@ -65,10 +69,17 @@ public class FrontController extends HttpServlet {
 		map.put("/javascript.do", new JSControl()); //js 연습
 		
 		map.put("/replyList.do", new ReplyListControl());//댓글데이터
-		map.put("/replyListDatatable.do", new RLDatatableControl());
 		map.put("/removeReply.do", new RemoveReplyControl()); //삭제
 		map.put("/addReply.do", new AddReplyControl());//추가
 		map.put("/replyCount.do", new ReplyCountControl());//댓글수
+		
+		map.put("/replyListDatatable.do", new RLDatatableControl()); //datatable 연습용
+		
+		//fullcalender관련.
+		map.put("/eventForm.do", new EventFormControl()); //캘린터 메인
+		map.put("/addEvent.do", new AddEventControl()); //일정 등록
+		map.put("/removeEvent.do", new RemoveEventControl()); //일정삭제
+		map.put("/eventList.do", new EventListControl()); // 전체일정
 	}
 
 	// service

@@ -145,8 +145,8 @@ document.querySelector('button.addReply').addEventListener('click', function(e) 
 			} else {
 				alert('등록실패...');
 				//입력값 초기화
-//				document.querySelector('#reply').value
-//				document.querySelector('#reply').value
+				document.querySelector('#reply').value
+				document.querySelector('#reply').value
 			}
 		}, errorCallback);
 })
