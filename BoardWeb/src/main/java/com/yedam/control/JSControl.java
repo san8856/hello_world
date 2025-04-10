@@ -12,7 +12,7 @@ public class JSControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// WEB-INF/views/etc/javascript.jsp
+		// /WEB-INF/views/etc/javascript.jsp
 		req.getRequestDispatcher("etc/javascript.tiles").forward(req, resp);
 	}
 

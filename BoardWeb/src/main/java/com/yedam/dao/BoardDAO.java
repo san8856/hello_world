@@ -9,14 +9,14 @@ import java.util.List;
 
 import com.yedam.vo.BoardVO;
 
-//DAO - data access object
 public class BoardDAO extends DAO {
 
 	public List<BoardVO> boardList() {
 		List<BoardVO> list = new ArrayList<>();
 		Connection conn = getConnect();
 		try {
-			PreparedStatement psmt = conn.prepareStatement("select * from tbl_board");
+			PreparedStatement psmt //
+					= conn.prepareStatement("select * from tbl_board");
 			ResultSet rs = psmt.executeQuery();
 			while (rs.next()) {
 				BoardVO board = new BoardVO();

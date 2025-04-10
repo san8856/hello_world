@@ -17,7 +17,7 @@ const table = new DataTable('#example', {
 	order: [[0, 'desc']]
 });
 
-// 등록.
+// 1.등록
 function addNewRow() {
 	// control 을 통해서 db 한건생성.
 	let reply = document.querySelector('#addContent').value;
@@ -41,15 +41,16 @@ function addNewRow() {
 		.catch(err => console.error(err));
 }
 
-document.querySelector('#addRow').addEventListener('click', addNewRow);
+document.querySelector('#addRow')//
+	.addEventListener('click', addNewRow);
 
-//삭제
+// 2.삭제
 let rno;
 table.on('click', 'tbody tr', (e) => {
 	console.log(e.currentTarget.children[0].innerHTML);
-	let classList = e.currentTarget.classList; //해당되는 요소의 클래스의 목록을 배열형태로 가지고 있음.  class목록()
+	let classList = e.currentTarget.classList; // class목록()
 
-	// classList에 contains ('클래스명'), 제거(remove('클래스명'),추가(add('클래스명')) 
+	// classList에 contains('클래스명'), 제거(remove('클래스명'), 추가(add('클래스명'))
 	if (classList.contains('selected')) {
 		classList.remove('selected');
 		rno = '';
@@ -60,8 +61,8 @@ table.on('click', 'tbody tr', (e) => {
 		rno = e.currentTarget.children[0].innerHTML;
 	}
 });
-// 삭제 버튼 클릭 이벤트
-document.querySelector('#delRow')
+
+document.querySelector('#delRow')//
 	.addEventListener('click', function() {
 		if (!rno) {
 			alert('삭제할 글을 선택하세요.');
@@ -77,29 +78,7 @@ document.querySelector('#delRow')
 				}
 			})
 			.catch(err => console.error(err))
+
 	});
 
-
-
-
-
-/*
-{
-	"data" [
-		[
-			"Tiger Nixon",
-				  "System Architect",
-				  "Edinburgh",
-				  "5421",
-				  "2011-04-25",
-				  "$320,800"
-		]
-	]
-}
-*/
-
-
-
-
-
-
+// end of file.

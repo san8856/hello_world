@@ -21,38 +21,37 @@ public class AddReplyControl implements Control {
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/json;charset=utf-8");
-		
-		// board_no, replyer, reply
+
+		// board_no, replyer, reply 필요.
 		String bno = req.getParameter("bno");
 		String replyer = req.getParameter("replyer");
 		String reply = req.getParameter("reply");
-		
-		//댓글등록
+		// 댓글등록.
 		ReplyVO rvo = new ReplyVO();
 		rvo.setBoardNo(Integer.parseInt(bno));
 		rvo.setReply(reply);
 		rvo.setReplyer(replyer);
 		rvo.setReplyDate(new Date());
 		System.out.println(rvo);
-		
-		Gson gson = new GsonBuilder().create();//Gson 사용
+
+		Gson gson = new GsonBuilder().create(); // Gson사용.
 		Map<String, Object> map = new HashMap<>();
-		
-		//서비스 호출
+
+		// 서비스호출.
 		ReplyService svc = new ReplyServiceImpl();
-		if(svc.addReply(rvo)) {
-				// {"retCode": "OK"}
-				//resp.getWriter().print("{\"retCode\": \"OK\"}");
-				map.put("retCode", "OK");
-				map.put("retVal", rvo);
-			} else {
-				// {"retCode": "NG"}
-				//resp.getWriter().print("{\"retCode\": \"NG\"}");
-				map.put("retCode", "NG");
-			}
+		if (svc.addReply(rvo)) {
+			// {"retCode": "OK"}
+//			resp.getWriter().print("{\"retCode\": \"OK\"}");
+			map.put("retCode", "OK");
+			map.put("retVal", rvo);
+		} else {
+			// {"retCode": "NG"}
+//			resp.getWriter().print("{\"retCode\": \"NG\"}");
+			map.put("retCode", "NG");
+		}
 		String json = gson.toJson(map);
 		resp.getWriter().print(json);
-		
-	}//end of exec.
+
+	} // end of exec.
 
 }

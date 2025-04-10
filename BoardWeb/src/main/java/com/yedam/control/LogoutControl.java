@@ -13,10 +13,11 @@ public class LogoutControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		HttpSession session = req.getSession();
-		session.invalidate();//세션삭제.
-		
-		resp.sendRedirect("loginForm.do");
+		session.invalidate(); // 세션삭제.
+
+		resp.sendRedirect("main.do");
 	}
 
 }

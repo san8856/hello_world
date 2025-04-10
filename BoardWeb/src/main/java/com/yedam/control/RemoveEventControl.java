@@ -1,60 +1,37 @@
 package com.yedam.control;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.URLDecoder;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.yedam.common.Control;
-import com.yedam.service.EventService;
-import com.yedam.service.EventServiceImpl;
-import com.yedam.vo.EventVO;
+import com.yedam.service.EtcService;
+import com.yedam.service.EtcServiceImpl;
 
 public class RemoveEventControl implements Control {
 
-    @Override
-    public void exec(HttpServletRequest req, HttpServletResponse resp) {
-        try {
-            // 한글 인코딩 처리
-            req.setCharacterEncoding("UTF-8");
-            resp.setContentType("application/json;charset=UTF-8");
+	@Override
+	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String title = req.getParameter("title");
+		String start = req.getParameter("start");
+		String end = req.getParameter("end");
 
-            // JSON 데이터 읽기
-            BufferedReader reader = new BufferedReader(new InputStreamReader(req.getInputStream()));
-            JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
+		Map<String, Object> map = new HashMap<>();
+		map.put("title", title);
+		map.put("start", start);
+		map.put("end", end);
 
-            // JSON 파싱
-            String title = URLDecoder.decode(json.get("title").getAsString(), "UTF-8");
-            String start = json.get("startDate").getAsString();
-            String end = json.get("endDate").getAsString();
+		EtcService svc = new EtcServiceImpl();
+		if (svc.removeEvent(map)) {
+			resp.getWriter().print("{\"retCode\": \"OK\"}");
+		} else {
+			resp.getWriter().print("{\"retCode\": \"NG\"}");
+		}
+	}
 
-            // VO 세팅
-            EventVO vo = new EventVO();
-            vo.setTitle(title);
-            vo.setStartDate(start);
-            vo.setEndDate(end);
-
-            // 서비스 처리
-            EventService svc = new EventServiceImpl();
-            boolean result = svc.removeEvent(vo);
-
-            // 결과 반환
-            PrintWriter out = resp.getWriter();
-            JsonObject ret = new JsonObject();
-            if (result) {
-                ret.addProperty("retCode", "OK");
-            } else {
-                ret.addProperty("retCode", "Fail");
-            }
-            out.print(ret.toString());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

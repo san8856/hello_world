@@ -113,9 +113,9 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                    <!-- body 영역 -->
-                    <tiles:insertAttribute name="body" />
-                     </div>   
+                        <!-- body영역. -->
+                        <tiles:insertAttribute name="body" />
+                    </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

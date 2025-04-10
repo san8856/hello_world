@@ -9,27 +9,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.yedam.common.Control;
-import com.yedam.service.EventService;
-import com.yedam.service.EventServiceImpl;
-
+import com.yedam.service.EtcService;
+import com.yedam.service.EtcServiceImpl;
 
 public class EventListControl implements Control {
-	
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	    EventService service = new EventServiceImpl();
-	    List<Map<String, Object>> list = service.getEvents();
+		resp.setContentType("text/json;charset=utf-8");
 
-	    // JSON 변환
-	    Gson gson = new Gson();
-	    String json = gson.toJson(list);
+		// 목록.
+		EtcService svc = new EtcServiceImpl();
+		List<Map<String, Object>> list = svc.eventList();
 
-	    // 응답 설정
-	    resp.setContentType("application/json;charset=utf-8");
-	    resp.getWriter().print(json);
-		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(list);
+
+		resp.getWriter().print(json);
+
 	}
 
 }

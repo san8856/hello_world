@@ -21,16 +21,14 @@ public class WelcomeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		response.setContentType("text/html;charset=utf-8");
+		
 		PrintWriter out = response.getWriter();
-		// ㄴ char 기반 출력 스트림
-		out.print("안녕하세요.");
+		out.print("<h3>안녕하세요.</h3>");
 		out.print("<a href='index.html'>첫페이지로 이동</a>");
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 

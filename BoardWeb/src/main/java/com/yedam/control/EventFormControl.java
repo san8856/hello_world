@@ -12,7 +12,9 @@ public class EventFormControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("WEB-INF/views/etc/event.jsp").forward(req, resp);
+		// TODO Auto-generated method stub
+		req.getRequestDispatcher("WEB-INF/views/etc/event.jsp")//
+				.forward(req, resp);
 	}
 
 }

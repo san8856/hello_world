@@ -131,6 +131,7 @@ span.psw {
 <%
   String msg = (String) request.getAttribute("msg");
 %>
+
 <h2>Modal Login Form</h2>
 
 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
@@ -144,12 +145,15 @@ span.psw {
     </div>
 
     <div class="container">
-    <!-- msg 출력. -->
+      <!-- msg 출력. -->
       <%
         if (msg != null) {
       %>
-	  <p style="color: red"><%=msg %></p>		
-	  <%} %>
+      <p style="color: red"><%=msg %></p>
+      <%
+        }
+      %>
+      
       <label for="uname"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" name="uname" required>
 
@@ -183,4 +187,3 @@ window.onclick = function(event) {
 
 </body>
 </html>
-    

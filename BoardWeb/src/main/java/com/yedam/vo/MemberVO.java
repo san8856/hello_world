@@ -8,9 +8,9 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MemberVO {
-	private String userId;
-	private String password;
-	private String userName;
+	private String memberId;
+	private String memberPw;
+	private String memberName;
 	private String responsibility;
 	private String images;
 }

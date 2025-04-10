@@ -2,11 +2,11 @@ package com.yedam.mapper;
 
 import java.util.List;
 
+import com.yedam.common.SearchDTO;
 import com.yedam.vo.BoardVO;
-import com.yedam.vo.SearchDTO;
 
 /*
- * 인터페이스(메소드정의) - 구현클래스를 통해 메소드 구현
+ * 인터페이스(메소드정의) - 구현클래스(메소드구현)
  */
 public interface BoardMapper {
 	//목록.
@@ -21,5 +21,4 @@ public interface BoardMapper {
 	BoardVO selectOne(int boardNo);
 	//전체건수.
 	int selectTotal(SearchDTO search);
-	
-}	
+}

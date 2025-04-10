@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <h3>회원가입(signForm.jsp)</h3>
 <form action="signUp.do" method="post" enctype="multipart/form-data">
   <table class="table">
@@ -20,12 +20,10 @@
       <th>이미지</th>
       <td><input class="form-control" type="file" name="userImg"></td>
     </tr>
-	<tr>
-	  <td colspan="2" align="center">
-	    <input type="submit" class="btn btn-primary" value="회원가입">
-	    <input type="reset" class="btn btn-secondary" value="초기화">
-	  </td>
-	</tr>
+    <tr>
+      <td colspan="2" align="center">
+        <input type="submit" class="btn btn-primary" value="회원가입">
+        <input type="reset" class="btn btn-secondary" value="초기화">
+      </td>
   </table>
 </form>
-
