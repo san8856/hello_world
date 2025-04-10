@@ -28,4 +28,15 @@ public class EtcServiceImpl implements EtcService {
 		return mapper.deleteEvent(data) == 1;
 	}
 
+	@Override
+	public List<Map<String, Object>> cntPerWriter() {
+		// TODO Auto-generated method stub
+		return mapper.selectWriter();
+	}
+
+	@Override
+	public void logCreate(Map<String, String> map) {
+		mapper.insertLogging(map);
+	}
+
 }

@@ -9,10 +9,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.yedam.common.DataSource;
 import com.yedam.mapper.EtcMapper;
-import com.yedam.service.EtcService;
-import com.yedam.service.EtcServiceImpl;
 
-public class AppMain {
+
+public class test {
 	public static void main(String[] args) {
 		
 		SqlSession sqlSession = DataSource.getInstance().openSession();

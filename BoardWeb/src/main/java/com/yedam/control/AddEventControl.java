@@ -16,6 +16,7 @@ public class AddEventControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8"); //요청방식: POST ,한글로 지정
 		// title, start, end
 		String title = req.getParameter("title");
 		String start = req.getParameter("start");

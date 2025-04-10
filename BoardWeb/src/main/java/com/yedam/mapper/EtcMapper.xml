@@ -6,9 +6,7 @@
 <mapper namespace="com.yedam.mapper.EtcMapper">
   <!-- 목록. -->
   <select id="selectEvent">
-    select title as "title"
-          ,start_date as "start"
-          ,end_date as "end"
+    select title as "title" ,start_date as "start" ,end_date as "end"
     from tbl_event
   </select>
 
@@ -23,4 +21,26 @@
     and   start_date=#{start}
     and   end_date=#{end}
   </delete>
+  
+  <!-- chart -->
+  <select id="selectWriter" resultType="map">
+    select member_name as "memberName", b.writer as "writer", count(1) as "cnt"
+	from tbl_board b
+	join tbl_member m
+	on b.writer = m.member_id
+	group by member_name, b.writer
+  </select>
+  
+  <!-- 로그 -->
+  <insert id="insertLogging" parameterType="map">
+  insert into tbl_logging(log_id, req_path, req_host)
+  values (logging_seq.nextval, #{page}, #{host})
+  </insert>
+  
+  
+  
+  
+  
+  
+  
 </mapper>

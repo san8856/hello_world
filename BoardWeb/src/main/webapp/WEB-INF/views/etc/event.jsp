@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -15,9 +17,7 @@
       console.log('2');
       let result = await fetch('eventList.do');
       let result2 = await result.json(); // [{title,start,end}]
-      console.log(result2);
-	  events = result2;
-
+      events = result2;
 
       console.log('3');
       var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -30,17 +30,34 @@
         navLinks: true, // can click day/week names to navigate views
         selectable: true,
         selectMirror: true,
-        select: function (arg) {
+        select: async function (arg) {
+        	console.log(arg);
           var title = prompt('Event Title:');
           if (title) {
-            calendar.addEvent({
-              title: title,
-              start: arg.start,
-              end: arg.end,
-              allDay: arg.allDay
-            })
-          }
-          calendar.unselect()
+        	let allDay = arg.allDay; // 하루전체일정, 부분일정.
+        	let start = allDay ? arg.startStr : arg.startStr.substring(0, 19);
+        	let end = allDay ? arg.endStr : arg.endStr.substring(0, 19);
+        	
+        	
+        	
+ //get방식  	//let r1 = await fetch('addEvent.do?title='+title+'&start='+start+'&end='+end);
+        	let r1 = await fetch('addEvent.do', {
+        		method: 'post',
+        		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        		body: 'title=' + title + '&start=' + start + '&end=' + end
+        	});    //post방식
+        	let r2 = await r1.json();
+        	if (r2.retCode == 'OK')
+	            calendar.addEvent({
+	              title: title,
+	              start: arg.start,
+	              end: arg.end,
+	              allDay: arg.allDay
+	            })
+	        else
+	        	alert('등록실패');
+          } // end of if(title).
+          calendar.unselect();
         },
         eventClick: function (arg) {
           if (confirm('Are you sure you want to delete this event?')) {
