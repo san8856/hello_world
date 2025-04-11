@@ -23,6 +23,8 @@
     </thead>
     <tbody id="centerList"></tbody>
   </table>
+  
+  <ul id="list"></ul>
 
   <script>
     let url =
@@ -101,6 +103,7 @@
       window.open('map.jsp?lat=' + center.lat + '&lng=' + center.lng);
     }
   </script>
+  <script src="js/array2.js"></script>
 </body>
 
 </html>

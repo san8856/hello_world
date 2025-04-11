@@ -8,7 +8,7 @@ const jsonStr = `[{"id":1,"first_name":"Matthieu","last_name":"Crolla","email":"
 {"id":4,"first_name":"Carolus","last_name":"Trowell","email":"ctrowell3@lulu.com","gender":"Male","salary":5469},
 {"id":5,"first_name":"Jamie","last_name":"Eagar","email":"jeagar4@ycombinator.com","gender":"Male","salary":9481},
 {"id":6,"first_name":"Elisabet","last_name":"Benes","email":"ebenes5@mozilla.com","gender":"Female","salary":8012},
-{"id":7,"first_name":"Malory","last_name":"Burbank","email":"mburbank6@ft.com","gender":"Polygender","salary":4976},
+{"id":7,"first_name":"Malory","last_name":"Burbank","email":"mburbank6@ft.com","gender":"Male","salary":4976},
 {"id":8,"first_name":"Carlota","last_name":"Dudny","email":"cdudny7@soundcloud.com","gender":"Genderfluid","salary":4947},
 {"id":9,"first_name":"Bay","last_name":"Yoslowitz","email":"byoslowitz8@ox.ac.uk","gender":"Male","salary":4288},
 {"id":10,"first_name":"Inglis","last_name":"Kringe","email":"ikringe9@unesco.org","gender":"Male","salary":3708},
